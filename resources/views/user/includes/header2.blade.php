@@ -2,7 +2,7 @@
     ================================================= -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-togglable header-white">
         <div class="container">
-            <a class="navbar-brand" href="index-3.html">
+            <a class="navbar-brand" href="#">
                 <h3>Layanan Mandiri</h3>
             </a>
             <!-- Toggler -->

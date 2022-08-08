@@ -7,46 +7,31 @@
             <div class="col-md-10">
                 <div class="card ">
                     <div class="card-header">
-                        <h5 class="font-weight-bold">Profil Admin</h5>
+                        <h5 class="font-weight-bold">Profil {{ ucwords(Auth::user()->hak_akses) }}</h5>
                     </div>
                     <div class="card-body">
                         <div class="container my-4">
                             <div class="row">
-                                <div class="col-md-6 col-12 text-center">
+                                <div class="col-12 text-center">
                                     <div class="foto w-50 mx-auto">
-                                        <img src="{{ Auth::user()->img_user != null ? asset(Auth::user()->img_user) : asset('assets/admin/img/default-avatar.png') }}" class="img-fluid rounded-circle mb-2" alt="">
+                                        <img src="{{ Auth::user()->foto != null ? asset(Auth::user()->foto) : asset('assets/admin/img/default-avatar.png') }}" class="img-fluid rounded-circle mb-2" alt=""> <br>
                                         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#gantiFoto">
                                             Ganti foto
                                         </button>
                                     </div>
                                     <h3 class="font-weight-bold">{{ Auth::user()->nama }}</h3>
-                                    
+                                    <h5>{{ Auth::user()->email }}</h5>
                                     <div class="btn-profil mt-5">
-                                        <a href="{{ route(Auth::user()->roles.'.profil.edit', 'edit') }}" class="btn btn-primary">Ubah profil</a>
                                         
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gantiEmail">
+                                            Ubah Email
+                                        </button>
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#gantiPass">
                                             Ubah Password
                                         </button>
                                             
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
-                                    
-                                    
-                                    
-                                    <h5 class="font-weight-bold mb-1">Username</h5>
-                                    <h5>{{ Auth::user()->username }}</h5>
-                                    <h5 class="font-weight-bold mb-1">Email</h5>
-                                    <h5>{{ Auth::user()->email }}</h5>
-                                    <h5 class="font-weight-bold mb-1">Nomor Telepon </h5>
-                                    <h5>{{ Auth::user()->no_hp }}</h5>
-                                    <h5 class="font-weight-bold mb-1">Alamat </h5>
-                                    <h5>{{ Auth::user()->alamat }}</h5>
-                                    
-
-                                    
-                                </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -57,6 +42,40 @@
     </div>
 </div>
 
+<!-- Modal ganti pass -->
+<div class="modal fade" id="gantiEmail" tabindex="-1" aria-labelledby="ganti-pass" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ganti-pass">Ganti Email</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{{ route('admin.profil.update', 'update') }}" id="form-submit">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required value="{{ old('email') ? old('email') : Auth::user()->email }}">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                
+                <div class="btn-bap">
+                    <button type="submit" id="tombol" class="btn btn-success w-100">Simpan</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">s
+        </div>
+      </div>
+    </div>
+</div>
 <!-- Modal ganti pass -->
 <div class="modal fade" id="gantiPass" tabindex="-1" aria-labelledby="ganti-pass" aria-hidden="true">
     <div class="modal-dialog">

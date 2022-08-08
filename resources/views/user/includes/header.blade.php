@@ -138,27 +138,27 @@
               <!-- Links -->
               <ul class="navbar-nav ">
                   <li class="nav-item ">
-                      <a href="index.html" class="nav-link js-scroll-trigger">
+                      <a href="{{ route('user.home') }}" class="nav-link">
                           Beranda
                       </a>
                   </li>
                   <li class="nav-item ">
-                      <a href="#tatacara" class="nav-link js-scroll-trigger">
-                          Tata Cara
+                      <a href="#tatacara" class="nav-link">
+                          Panduan
                       </a>
                   </li>
                   <li class="nav-item ">
-                      <a href="#layanankami" class="nav-link js-scroll-trigger">
+                      <a href="#layanankami" class="nav-link">
                           Layanan Kami
                       </a>
                   </li>
                   <li class="nav-item ">
-                      <a href="#berita" class="nav-link js-scroll-trigger">
+                      <a href="#berita" class="nav-link">
                           Berita
                       </a>
                   </li>
                   <li class="nav-item ">
-                      <a href="#tentangkami" class="nav-link js-scroll-trigger">
+                      <a href="#tentangkami" class="nav-link">
                           Tentang Kami
                       </a>
                   </li>

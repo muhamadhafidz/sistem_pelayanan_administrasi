@@ -159,83 +159,34 @@
                       <h2 class="section-title">
                           Berita Terbaru Kami
                       </h2>
-
+                      <a href="{{ route('user.berita') }}" class="btn btn-primary py-0">Lihat semua berita</a>
                   </div>
               </div>
           </div> <!-- / .row -->
 
           <div class="row justify-content-center">
-              <div class="col-lg-3 col-6">
-                  <div class="blog-box">
-                      <div class="blog-img-box">
-                          <img src="{{ asset('assets/images/blog/blog-1.jpg') }}" alt="" class="img-fluid blog-img">
-                      </div>
-                      <div class="single-blog">
-                          <div class="blog-content">
-                              <h6> 17 October 2018</h6>
-                              <a href="#">
-                                  <h3 class="card-title">Top tips to speed up your site in a speedy time</h3>
-                              </a>
-                              <p>There are many variations of passages Lorem Ipsum available, but majority have ama suffered altratio. the lorem.</p>
-                              <a href="#" class="read-more">Read More</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+            @forelse ($berita as $item)
+                
+            <div class="col-lg-3 col-6">
+                <div class="blog-box">
+                    <div class="blog-img-box">
+                        <img src="{{ asset($item->foto) }}" alt="" class="img-fluid blog-img">
+                    </div>
+                    <div class="single-blog">
+                        <div class="blog-content">
+                            <h6> {{ $item->created_at->isoFormat('DD MMM YYYY') }}</h6>
+                            <a href="#">
+                                <h3 class="card-title">{{ $item->judul }}</h3>
+                            </a>
+                            <a href="{{ route('user.berita.detail', $item->slug) }}" class="read-more">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @empty
+                <h5>Tidak ada berita</h5>
+            @endforelse
 
-              <div class="col-lg-3 col-6">
-                  <div class="blog-box">
-                      <div class="blog-img-box">
-                          <img src="{{ asset('assets/images/blog/blog-2.jpg') }}" alt="" class="img-fluid blog-img">
-                      </div>
-                      <div class="single-blog">
-                          <div class="blog-content">
-                              <h6> 17 October 2018</h6>
-                              <a href="#">
-                                  <h3 class="card-title">Brand your site value with marketing strategies</h3>
-                              </a>
-
-                              <p>There are many variations of passages Lorem Ipsum available, but majority have ama suffered altratio. the lorem.</p>
-                               <a href="#" class="read-more">Read More</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="col-lg-3 col-6">
-                  <div class="blog-box">
-                      <div class="blog-img-box">
-                          <img src="{{ asset('assets/images/blog/blog-3.jpg') }}" alt="" class="img-fluid blog-img">
-                      </div>
-                      <div class="single-blog">
-                          <div class="blog-content">
-                              <h6> 17 October 2018</h6>
-                              <a href="#">
-                                  <h3 class="card-title">Website Optimization is very essential for site speed</h3>
-                              </a>
-                              <p>There are many variations of passages Lorem Ipsum available, but majority have ama suffered altratio. the lorem.</p>
-                               <a href="#" class="read-more">Read More</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-lg-3 col-6">
-                  <div class="blog-box">
-                      <div class="blog-img-box">
-                          <img src="{{ asset('assets/images/blog/blog-3.jpg') }}" alt="" class="img-fluid blog-img">
-                      </div>
-                      <div class="single-blog">
-                          <div class="blog-content">
-                              <h6> 17 October 2018</h6>
-                              <a href="#">
-                                  <h3 class="card-title">Website Optimization is very essential for site speed</h3>
-                              </a>
-                              <p>There are many variations of passages Lorem Ipsum available, but majority have ama suffered altratio. the lorem.</p>
-                               <a href="#" class="read-more">Read More</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
           </div>
       </div>
   </section>

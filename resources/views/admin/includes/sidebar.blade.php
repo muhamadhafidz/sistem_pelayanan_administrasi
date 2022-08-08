@@ -2,16 +2,15 @@
     <!-- Brand Logo -->
     <a href="{{ route('user.home') }}" class="brand-link text-center font-weight-bold">
       {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
-      <span class="brand-text font-weight-normal">Navil Store Admin</span>
+      <span class="brand-text font-weight-normal">SIPAK Desa Jengawur <br>
+        {{ ucwords(Auth::user()->hak_akses) }}
+      </span>
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar ">
       <!-- Sidebar user panel (optional) -->
-      <div class="mt-3 pb-3 mb-3 d-flex">
-        
-      </div>
-      <div class="form-inline">
+      <div class="form-inline mt-2">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Cari Halaman" aria-label="Search">
           <div class="input-group-append">
@@ -38,22 +37,28 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('admin.pengajuan') }}" class="nav-link {{ Request::is('admin/pengajuan*') ? 'active' : '' }}">
-              <i class="fas fa-boxes nav-icon"></i>
+              <i class="fas fa-file-signature nav-icon"></i>
               <p>Pengajuan Dokumen <span class="right badge badge-light">{{ App\Document_request::where('status', '!=', 'selesai')->count() }}</span></p>
             </a>
           </li>
           @if (Auth::user()->hak_akses == "kades")
           <li class="nav-item">
             <a href="{{ route('admin.arsip') }}" class="nav-link {{ Request::is('admin/arsip*') ? 'active' : '' }}">
-              <i class="fas fa-boxes nav-icon"></i>
-              <p>Arsip Dokumen <span class="right badge badge-light">{{ App\Document_request::where('status', 'selesai')->count() }}</span></p>
+              <i class="fas fa-file-alt nav-icon"></i>
+              <p>Arsip/Laporan <span class="right badge badge-light">{{ App\Document_request::where('status', 'selesai')->count() }}</span></p>
             </a>
           </li>
           @endif
           @if (Auth::user()->hak_akses == "admin")
           <li class="nav-item">
+            <a href="{{ route('admin.berita.index') }}" class="nav-link {{ Request::is('admin/berita*') ? 'active' : '' }}">
+              <i class="fas fa-newspaper nav-icon"></i>
+              <p>Berita</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.pengguna.index') }}" class="nav-link {{ Request::is('admin/pengguna*') ? 'active' : '' }}">
-              <i class="fas fa-boxes nav-icon"></i>
+              <i class="fas fa-users nav-icon"></i>
               <p>Pengguna</p>
             </a>
           </li>

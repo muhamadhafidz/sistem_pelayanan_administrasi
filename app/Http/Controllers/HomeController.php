@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Berita;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -18,6 +19,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('user.pages.home.index');
+        $berita = Berita::take(4)->get();
+        return view('user.pages.home.index', [
+            'berita' => $berita
+        ]);
     }
 }

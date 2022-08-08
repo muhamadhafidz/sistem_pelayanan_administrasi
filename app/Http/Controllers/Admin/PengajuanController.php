@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Approval_detail;
 use App\Document_request;
 use App\Http\Controllers\Controller;
 use App\Ready_document_request;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use RealRashid\SweetAlert\Facades\Alert;
 use PhpOffice\PhpWord\TemplateProcessor;
-
+use Str;
 
 class PengajuanController extends Controller
 {
@@ -68,22 +70,60 @@ class PengajuanController extends Controller
         $templateProcessor->setValue('alamat', $req->user->user_detail->alamat);
         $templateProcessor->setValue('keperluan', $req->keperluan);
         $templateProcessor->setValue('tgl_surat', $req->updated_at->isoFormat('DD MMMM YYYY'));
-        $templateProcessor->setValue('kades', 'testing');
+
+        $dataKades = Approval_detail::first();
+
+        $templateProcessor->setValue('kades', $dataKades->nama_kades);
+        $templateProcessor->setImageValue('ttd', array('path' => $dataKades->ttd_digital, 'height' => 60, ));
 
         $reNosur = str_replace('/', '_', $req->nomor_surat);
-        $pathToSave = 'assets/user/dokumen/'.$req->user->nik.'_'.$reNosur.'.docx';
+        $pathToSave = 'assets/user/dokumen/'.$req->user->nik.'_'.$reNosur.'.doc';
         $templateProcessor->saveAs($pathToSave);
-
-        $Content = \PhpOffice\PhpWord\IOFactory::load($pathToSave); 
- 
-        //Save it into PDF
-        $savePdfPath = 'assets/user/dokumen/'.$req->user->nik.'_'.$reNosur.'.pdf';
- 
-        //Save it into PDF
-        $PDFWriter = \PhpOffice\PhpWord\IOFactory::createWriter($Content,'PDF');
-        $PDFWriter->save($savePdfPath); 
         
-        // unlink($pathToSave);
+        $savePdfPath = 'assets/user/dokumen/'.$req->user->nik.'_'.$reNosur.'.pdf';
+
+        $sendRequestUpload = Http::withHeaders([
+            'cache-control' => 'no-cache',
+            'content-type' => 'application/json',
+            'x-oc-api-key' => 'b5513cc9ec7be3956dddd46a8b80f8ae'
+        ])->post('https://api.api2convert.com/v2/jobs', [
+            "conversion" => [
+                "category"=> "document",
+                "target" => "pdf"
+            ]
+        ]);
+        $dataRequestUpload = $sendRequestUpload->json();
+        $jobId = $dataRequestUpload['id'];
+        $jobServer = $dataRequestUpload['server'];
+        $uuid = Str::uuid();
+
+        $doc = fopen($pathToSave, 'r');
+
+        $uploadFile = Http::withHeaders([
+            'cache-control' => 'no-cache',
+            'x-oc-upload-uuid' => $uuid->toString(),
+            'x-oc-api-key' => 'b5513cc9ec7be3956dddd46a8b80f8ae'
+        ])->attach(
+            'file', $doc
+        )->post($jobServer.'/upload-file/'.$jobId);
+
+        $status = true;
+
+        while($status) {
+            $getFile = Http::withHeaders([
+                'cache-control' => 'no-cache',
+                'x-oc-api-key' => 'b5513cc9ec7be3956dddd46a8b80f8ae'
+            ])->get('https://api.api2convert.com/v2/jobs/'.$jobId);
+            
+            if ($getFile->json()['status']['code'] == 'completed') {
+                $status = false;
+            }
+            
+        }
+
+
+        $getPdf = file_get_contents($getFile->json()['output'][0]['uri']);
+        file_put_contents($savePdfPath, $getPdf);
 
         Ready_document_request::create([
             'document_request_id' => $req->id,

@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.4",
         "phpoffice/phpword": "^0.18.3",
-        "realrashid/sweet-alert": "^5.1"
+        "realrashid/sweet-alert": "^5.1",
+        "tecnickcom/tcpdf": "^6.4"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

@@ -4,15 +4,15 @@
 {{-- {{  }} --}}
 <div class="content">
     <div class="container-fluid">
-      <h5 class="mb-2">Data Produk</h5>
+      <h5 class="mb-2">Data Dokumen</h5>
       <div class="row">
         <div class="col-md-3 col-sm-6 col-12">
           <div class="info-box">
             <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text text-wrap">Total Barang/Produk</span>
-              <span class="info-box-number"></span>
+              <span class="info-box-text text-wrap">Total Dokumen yang telah dibuat</span>
+              <span class="info-box-number">{{ App\Ready_document_request::count() }}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -24,76 +24,30 @@
             <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text text-wrap">Produk Terjual</span>
-              <span class="info-box-number"></span>
+              <span class="info-box-text text-wrap">Dokumen menunggu ditanda tangani</span>
+              <span class="info-box-number">{{ App\Document_request::where('status', 'diproses')->count() }}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
         </div>
+        @if (Auth::user()->hak_akses == "admin")    
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text text-wrap">Dokumen menunggu diverifikasi</span>
+              <span class="info-box-number">{{ App\Document_request::where('status', 'ditinjau')->count() }}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        @endif
         
         <!-- /.col -->
       </div>
-      <h5 class="mb-2">Pesanan</h5>
-      <div class="row">
-        <div class="col-md-3 col-sm-6 col-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text text-wrap">Total Pesanan</span>
-              <span class="info-box-number"></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text text-wrap">Total Pesanan Sukses</span>
-              <span class="info-box-number"></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <div class="col-md-3 col-sm-6 col-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text text-wrap">Total Omzet Pesanan</span>
-              <span class="info-box-number">Rp. </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <h5 class="mb-2">Reseller</h5>
-      <div class="row">
-        <div class="col-md-3 col-sm-6 col-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text text-wrap">Total Reseller</span>
-              <span class="info-box-number"></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        
-        <!-- /.col -->
-      </div>
-      
     </div>
 </div>
 <!-- Button trigger modal -->

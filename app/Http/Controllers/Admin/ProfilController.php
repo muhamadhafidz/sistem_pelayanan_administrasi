@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Image;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfilController extends Controller
 {
@@ -14,7 +18,7 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.profil.index');
     }
 
     /**
@@ -35,7 +39,7 @@ class ProfilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -69,7 +73,14 @@ class ProfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $email = $request->validate([
+            'email' => 'required|unique:users,email,'.Auth::user()->id
+        ]);
+
+        Auth::user()->email = $request->email;
+        Auth::user()->save();
+
+        return redirect()->route('admin.profil.index');
     }
 
     /**
@@ -117,29 +128,23 @@ class ProfilController extends Controller
         ]);
 
         $user = Auth::user();
-        // dd($user);
 
         $file = $request->file('foto');
         $file_name = $file->getFilename().".".strtolower($file->getClientOriginalExtension());
         
         $file_location = "assets/user/img/profil/";
         $img = Image::make($file);
-        // $img->move('assets/user/img/coba', 'aw.jpg');
-        $img->save($file_location.$file_name, 50);
-        // dd($aw);
-        // $stored_file = $file->move($file_location, $file_name);
 
-        $data['img_user'] = $file_location.$file_name;
-        // $file_name = $file->getFilename().".".$file->getClientOriginalExtension();
-        // $file_location = "assets/user/img/profil";
-        // $stored_file = $file->move($file_location, $file_name);
-        
-        if ($user->img_user != "-") {
-            File::delete($user->img_user);
+        $img->save($file_location.$file_name, 50);
+
+        $data['foto'] = $file_location.$file_name;
+
+        if ($user->foto != "-") {
+            File::delete($user->foto);
         }
 
         $user->update([
-            'img_user' => $data['img_user']
+            'foto' => $data['foto']
         ]);
 
         // dd($test);

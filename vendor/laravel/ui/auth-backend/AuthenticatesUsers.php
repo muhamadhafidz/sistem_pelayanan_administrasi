@@ -134,6 +134,7 @@ trait AuthenticatesUsers
      */
     protected function authenticated(Request $request, $user)
     {
+        // dd($user->hak_akses);
         if($user->hak_akses == 'admin' || $user->hak_akses == 'kades' ){
             Alert::toast('Berhasil login!', 'success');
             return redirect('/admin/dashboard');

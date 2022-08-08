@@ -3,14 +3,18 @@
   <!--Content -->
   <div class="container">
       <div class="row">
-          <div class="col-8 offset-2">
+          <div class="col-7 ">
               <div class="footer-widget text-center">
                   <!-- Brand -->
                   <a href="#" class="footer-brand text-white" style="font-size: 25px;">
                       Sistem Informasi Pelayanan Administrasi Kependudukan Desa Jenggawur
                   </a>
-                  <p>Adalah Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas illum rem omnis, aperiam, voluptates dolore a eveniet mollitia ab cumque obcaecati blanditiis magnam itaque nobis. Doloribus voluptatum ratione nam ut..</p>
+                  <br>
+                  <a href="{{ route('admin.login') }}" >Masuk sebagai Admin atau Kepada Desa</a>
               </div>
+          </div>
+          <div class="col-4 offset-1">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4843.171525754778!2d109.67232752459032!3d-7.391224908076557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aa96f4084a2e3%3A0x8d39292246a7e168!2sKantor%20Kepala%20Desa%20Jenggawur!5e0!3m2!1sid!2sid!4v1659984846996!5m2!1sid!2sid" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
 
       </div> <!-- / .row -->
