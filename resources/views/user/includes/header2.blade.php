@@ -34,7 +34,7 @@
                             {{ Auth::user()->nama }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarWelcome">
-                            <a class="dropdown-item" href="">
+                            <a class="dropdown-item" href="{{ route('user.profil.index') }}">
                                 Profil
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"

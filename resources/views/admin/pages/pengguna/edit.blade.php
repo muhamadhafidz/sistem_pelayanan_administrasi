@@ -88,7 +88,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Tanggal Lahir</label>
-                                <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') ? old('tanggal_lahir') : $item->user_detail->tanggal_lahir }}">
+                                <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') ? old('tanggal_lahir') : $item->user_detail->tanggal_lahir->isoFormat('YYYY-MM-DD') }}">
                                 @error('tanggal_lahir')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

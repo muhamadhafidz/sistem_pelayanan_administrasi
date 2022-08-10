@@ -32,6 +32,12 @@ Route::middleware(['auth'])
                 Route::get('/pengajuan', 'AjukanController@index')->name('user.pengajuan');
                 Route::post('/pengajuan/ajukan', 'AjukanController@ajukan')->name('user.pengajuan.ajukan');
                 Route::put('/pengajuan/batal/{id}', 'AjukanController@batal')->name('user.pengajuan.batal');
+
+                Route::post('profil/updatePassword', 'ProfilController@updatePassword')->name('user.profil.updatePassword');
+                Route::post('profil/updateFoto', 'ProfilController@updateFoto')->name('user.profil.updateFoto');
+                Route::resource('profil', 'ProfilController', [
+                    'as' => 'user'
+                ]);
             });
 
         Route::middleware(['isBoth'])
