@@ -18,8 +18,11 @@
     <div class="wrapper">
     
       <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="" alt="AdminLTELogo" height="100" width="100">
+        <div class="preloader flex-column justify-content-center align-items-center" style="background-color: #002a56!important">
+            <img src="{{ asset('assets/images/logo_tegal.png') }}" class="mb-5" alt="AdminLTELogo" height="100" >
+            <h4 class="text-white mt-2">
+              Sistem Informasi Pelayanan Administrasi Kependudukan Desa Jenggawur
+            </h4>
         </div>
         @include('admin.includes.navbar')
         {{-- sidebar --}}

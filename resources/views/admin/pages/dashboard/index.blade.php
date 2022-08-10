@@ -6,9 +6,9 @@
     <div class="container-fluid">
       <h5 class="mb-2">Data Dokumen</h5>
       <div class="row">
-        <div class="col-md-3 col-sm-6 col-12">
+        <div class="col-sm-6 col-12">
           <div class="info-box">
-            <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
+            <span class="info-box-icon bg-info" style="background-color: #002a56!important"><i class="fas fa-file-alt"></i></span>
 
             <div class="info-box-content">
               <span class="info-box-text text-wrap">Total Dokumen yang telah dibuat</span>
@@ -18,10 +18,12 @@
           </div>
           <!-- /.info-box -->
         </div>
+      </div>
+      <div class="row">
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-12">
+        <div class="col-sm-6 col-12">
           <div class="info-box">
-            <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
+            <span class="info-box-icon bg-info" style="background-color: #002a56!important"><i class="fas fa-file-signature"></i></span>
 
             <div class="info-box-content">
               <span class="info-box-text text-wrap">Dokumen menunggu ditanda tangani</span>
@@ -31,10 +33,13 @@
           </div>
           <!-- /.info-box -->
         </div>
+      </div>
+      
+      <div class="row">
         @if (Auth::user()->hak_akses == "admin")    
-        <div class="col-md-3 col-sm-6 col-12">
+        <div class="col-sm-6 col-12">
           <div class="info-box">
-            <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
+            <span class="info-box-icon bg-info" style="background-color: #002a56!important"><i class="fas fa-hourglass-half"></i></span>
 
             <div class="info-box-content">
               <span class="info-box-text text-wrap">Dokumen menunggu diverifikasi</span>
